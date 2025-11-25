@@ -637,6 +637,10 @@ public final class PurchasePlugin
       Log.w(mTag, "onPurchasesUpdated() -> JSONException "
           + e.getMessage());
       callError(Constants.ERR_PURCHASE, e.getMessage());
+    } finally {
+      // Reset billing request code regardless of success or failure
+      // This ensures that subsequent billing flows work correctly
+      cordova.setActivityResultCallback(null);
     }
   }
 
